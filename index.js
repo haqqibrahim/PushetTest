@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
+// Routes File
+const poll = require('./routers/polls');
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -15,10 +17,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // cors
 app.use(cors());
 
+// Routes
 app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.use('/poll', poll);
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
